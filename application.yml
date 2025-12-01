@@ -1,0 +1,15 @@
+app:
+  name: "AakashGonuguntla"
+  regNo: "22BCE7459"
+  email: "aakashgonuguntla76@gmail.com"
+  # Replace this with your final SQL after solving the question from the link (see logs)
+  finalQuery: "SELECT 1"
+
+bfhl:
+  baseUrl: "https://bfhldevapigw.healthrx.co.in"
+  generatePath: "/hiring/generateWebhook/JAVA"
+  submitPath: "/hiring/testWebhook/JAVA"
+
+logging:
+  level:
+    root: INFO
