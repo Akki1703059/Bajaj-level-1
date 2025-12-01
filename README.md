@@ -1,29 +1,48 @@
-# Bajaj Finserv Health | Qualifier 1 | JAVA — Starter
+Bajaj Finserv Health – JAVA Qualifier 1 (My Starter Notes)
 
-This starter finishes the required flow **on app startup** (no controller exposed):
-1) Calls *generate webhook*.
-2) Logs the question link to open (odd/even based on your regNo).
-3) Submits your **final SQL query** to the webhook using the JWT token.
+This project is a simple starter template that completes the required Qualifier-1 workflow automatically when the application starts. No controller calls are needed.
+ What the application does on startup
 
-> Edit `src/main/resources/application.yml` with your **name**, **regNo**, **email**, and paste your **finalQuery**.
+Generates a webhook by calling the generateWebhook API for JAVA.
 
-## Run (Java 17 + Maven)
-```bash
-# Build runnable JAR
+Reads my regNo, checks the last two digits, and prints the correct Google Drive question link (odd/even).
+
+Submits my final SQL query to the generated webhook using the provided JWT token.
+
+ What I have to update
+
+In src/main/resources/application.yml, I need to fill in my:
+
+name
+
+regNo
+
+email
+
+finalQuery (my final SQL answer that will be submitted)
+
+ How to Run (Java 17 + Maven)
+# Build the JAR (skips tests)
 mvn -q -DskipTests package
 
-# Run
+# Run the application
 java -jar target/bh-java-qualifier-0.0.1.jar
-```
 
-## What it does
-- On startup, it POSTs to `/hiring/generateWebhook/JAVA` and receives `webhook` + `accessToken` (JWT).
-- It extracts the last two digits of your `regNo` to decide odd/even and prints the **Google Drive question link** in the logs.
-- It writes your SQL into `final_query.sql` and then POSTs `{ "finalQuery": "<your SQL>" }` to the **returned webhook** with `Authorization: <accessToken>`. If that fails with 401, it retries once with `Authorization: Bearer <accessToken>`.
+ Internal Flow (Summary)
 
-## GitHub Submission
-- Create a new repo and push this folder.
-- Upload the built JAR (`target/bh-java-qualifier-0.0.1.jar`) as a Release or to any public file host.
-- Share both the repo URL and a **direct downloadable JAR link** in the submission form.
+On startup, the app sends a POST request to
+/hiring/generateWebhook/JAVA
+and receives:
 
-Good luck!
+webhook URL
+
+accessToken (JWT)
+
+It figures out if my register number is odd or even and prints the correct question link.
+
+It writes my SQL query into final_query.sql.
+
+Finally, it posts the SQL to the received webhook with
+Authorization: <accessToken>
+and if that fails (401), it retries with
+Authorization: Bearer <accessToken>.
